@@ -1,0 +1,34 @@
+// This is not real code, but illustrates the required logic
+
+// 1. WiFi Configuration
+const WIFI_SSID = "Your_WiFi_Network_Name";
+const WIFI_PASSWORD = "Your_WiFi_Password";
+// IMPORTANT: You must know the server's IP address beforehand
+const SERVER_IP = "192.168.1.123"; // The IP of the server device
+const SERVER_PORT = 8080;
+
+// 2. Connect to the WiFi network
+wifi.connect(WIFI_SSID, WIFI_PASSWORD);
+while (!wifi.isConnected()) {
+    sleep(1000); // Wait until connected
+}
+display.showText("Connected to WiFi.");
+
+// 3. Create a TCP client socket
+const client = network.createClient();
+
+// 4. Connect to the server
+if (client.connect(SERVER_IP, SERVER_PORT)) {
+    display.showText("Connected to server!");
+    
+    // 5. Send a message
+    client.write("Hello from the client!");
+    
+    // 6. Listen for a response
+    client.on('data', (data) => {
+        const message = data.toString();
+        display.showText("Server replied: " + message);
+    });
+} else {
+    display.showText("Connection failed!");
+}

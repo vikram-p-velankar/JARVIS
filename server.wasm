@@ -1,0 +1,63 @@
+// This is not real code, but illustrates the required logic
+
+// 1. WiFi Configuration
+const WIFI_SSID = "Your_WiFi_Network_Name";
+const WIFI_PASSWORD = "Your_WiFi_Password";
+const SERVER_PORT = 8080;
+
+// 2. Connect to the WiFi network
+wifi.connect(WIFI_SSID, WIFI_PASSWORD);
+while (!wifi.isConnected()) {
+    sleep(1000); // Wait until connected
+}
+
+// 3. Get the device's IP address and display it
+const myIP = wifi.getIPAddress();
+display.showText("Server is running at: " + myIP);
+
+// 4. Create a TCP server socket and listen for connections
+const server = network.createServer();
+server.listen(SERVER_PORT);
+
+// 5. Wait for a client to connect and handle incoming data
+server.on('connection', (client) => {
+    display.showText("Client connected!");
+    client.on('data', (data) => {
+        const message = data.toString();
+        display.showText("Received: " + message);
+        
+        // Echo the message back to the client
+        client.write("Server received: " + message);
+    });
+});// This is not real code, but illustrates the required logic
+
+// 1. WiFi Configuration
+const WIFI_SSID = "Your_WiFi_Network_Name";
+const WIFI_PASSWORD = "Your_WiFi_Password";
+const SERVER_PORT = 8080;
+
+// 2. Connect to the WiFi network
+wifi.connect(WIFI_SSID, WIFI_PASSWORD);
+while (!wifi.isConnected()) {
+    sleep(1000); // Wait until connected
+}
+
+// 3. Get the device's IP address and display it
+const myIP = wifi.getIPAddress();
+display.showText("Server is running at: " + myIP);
+
+// 4. Create a TCP server socket and listen for connections
+const server = network.createServer();
+server.listen(SERVER_PORT);
+
+// 5. Wait for a client to connect and handle incoming data
+server.on('connection', (client) => {
+    display.showText("Client connected!");
+    client.on('data', (data) => {
+        const message = data.toString();
+        display.showText("Received: " + message);
+        
+        // Echo the message back to the client
+        client.write("Server received: " + message);
+    });
+});
