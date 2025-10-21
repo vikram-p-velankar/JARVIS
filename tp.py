@@ -34,7 +34,7 @@ def say_hello_on_computer():
             pygame.mixer.music.unload() 
             os.remove(audio_file)
 
-to_phone_number = "+13136417969"
+to_phone_number = "REGISTERED_TWILIO_NUMBER"
 count_red = 0
 # --- This is the FreeWili part with your requested logic ---
 try:
@@ -151,4 +151,5 @@ except Exception as e:
     print(f"\n❌ An error occurred: {e}")
 finally:
     # Cleanly exit pygame when the program ends
+
     pygame.quit()
